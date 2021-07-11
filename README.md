@@ -5,4 +5,4 @@ but can of course also be used in Java projects. Currently it is not very custom
 ### Attributions
 EnglishDict.txt comes from [here](https://github.com/dwyl/english-words).
 
-This translator also uses [Unix4j](https://github.com/tools4j/unix4j)
+This translator also uses [Unix4j](https://github.com/tools4j/unix4j).
