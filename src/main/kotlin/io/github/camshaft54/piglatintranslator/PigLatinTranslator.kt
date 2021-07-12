@@ -1,5 +1,6 @@
 package io.github.camshaft54.piglatintranslator
 
+import org.apache.commons.io.FileUtils
 import org.unix4j.Unix4j
 import org.unix4j.unix.grep.GrepOption
 import java.io.File
@@ -47,11 +48,16 @@ import java.io.File
  */
 @Suppress("unused")
 class PigLatinTranslator(private var separators: List<String> = emptyList()) {
+    private val dict : File
+
     init {
         // Default separators if none are specified.
         if (separators.isEmpty()) {
             separators = listOf(" ", "-", "—", ".", ",", "\"")
         }
+        // Create temp file for dictionary
+        dict = File.createTempFile("tempDict", ".tmp")
+        FileUtils.copyInputStreamToFile(javaClass.classLoader.getResourceAsStream("englishDict.txt"), dict)
     }
 
     /**
@@ -159,9 +165,10 @@ class PigLatinTranslator(private var separators: List<String> = emptyList()) {
                         // Then add the letter content from the first consonant after the last vowel to the last letter
                         val testString =
                             translation.substring(j, lastLetter + 1) + translation.substring(firstLetter, j)
+
                         // Use grep to search the dictionary for complete matches with the test string. Grep is used because
                         // it is much faster than more conventional methods.
-                        val searchCommand = Unix4j.cat(File("src/main/resources/englishDict.txt"))
+                        val searchCommand = Unix4j.cat(dict)
                             .grep(GrepOption.wholeLine, testString)
                         // If there was a match in the dictionary add it to the list of dictWords.
                         if (searchCommand.toStringList().isNotEmpty()) {
