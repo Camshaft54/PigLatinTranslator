@@ -17,7 +17,7 @@ but can of course also be used in Java projects. Currently it is not very custom
 ```gradle
 implementation 'io.github.camshaft54:PigLatinTranslator:1.0.2'
 ```
-## Javadocs (🚧 Coming soon 🚧)
+## [Javadocs](https://camshaft54.github.io/PigLatinTranslator/)
 
 ## Attributions
 EnglishDict.txt comes from [here](https://github.com/dwyl/english-words).
